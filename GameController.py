@@ -3,7 +3,7 @@ from Building import Building
 from ObstacleLocation import ObstacleLocation
 from Move import Move
 from UserBot import UserBot
-from GameConfig import GameConfig
+import GameConfig
 
 class GameController(object):
 	def __init__(self):
@@ -83,13 +83,14 @@ class GameController(object):
 					destination = location
 		PrevMove = Move(origin.getFloor(),origin.getRoom())
 		for i in range(50):
-			if(!((moves[i].GetRow()==dest.GetFloor())and moves[i].GetColumn()==dest.GetRoom())):
-				if( BuildingMap.IsValidMove(*PrevMove,moves[i]) and (moves[i].GetRow()!=-1 and moves[i].GetColumn()!=-1)):
-					PrevMove = moves[i]
-					continue
-				else:
-					return False
-			if(BuildingMap.IsValidMove(*PrevMove,moves[i])):
+			if(moves[i].GetRow() != destination.GetFloor()):
+				if((moves[i].GetColumn() != destination.GetRoom())):
+					if(BuildingMap.IsValidMove(PrevMove,moves[i]) and (moves[i].GetRow()!=-1 and moves[i].GetColumn()!=-1)):
+						PrevMove = moves[i]
+						continue
+					else:
+						return False
+			if(BuildingMap.IsValidMove(PrevMove,moves[i])):
 				return True
 		'''
 		print(Path)

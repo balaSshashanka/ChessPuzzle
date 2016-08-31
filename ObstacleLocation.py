@@ -1,6 +1,6 @@
 import GameConfig
 
-class ObstacleLocation(Interface):
+class ObstacleLocation(object):
 	def __init__(self,room,floor,Otype):
 		self.room = room
 		self.floor = floor

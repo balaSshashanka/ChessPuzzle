@@ -1,5 +1,5 @@
-from Gameconfig import GameConfig
-from ObstacleLocation import
+import GameConfig
+from ObstacleLocation import ObstacleLocation
 
 class Building(object):
 	def __SetObstacleType(self,location):
