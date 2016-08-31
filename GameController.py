@@ -83,8 +83,8 @@ class GameController(object):
 					destination = location
 		PrevMove = Move(origin.getFloor(),origin.getRoom())
 		for i in range(50):
-			if(!((moves[i].GetRow()==dest->GetFloor())&&moves[i].GetColumn()==dest->GetRoom())):
-				if( BuildingMap.IsValidMove(*PrevMove,moves[i])&&(moves[i].GetRow()!=-1&&moves[i].GetColumn()!=-1)):
+			if(!((moves[i].GetRow()==dest.GetFloor())and moves[i].GetColumn()==dest.GetRoom())):
+				if( BuildingMap.IsValidMove(*PrevMove,moves[i]) and (moves[i].GetRow()!=-1 and moves[i].GetColumn()!=-1)):
 					PrevMove = moves[i]
 					continue
 				else:
