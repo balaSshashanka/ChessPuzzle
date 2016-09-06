@@ -6,8 +6,8 @@ class ObstacleLocation(object):
 		self.floor = floor
 		self.Otype = Otype
 	def getObstacle(self):
-		return Otype
+		return self.Otype
 	def getRoom(self):
-		return room
+		return self.room
 	def getFloor(self):
-		return floor
+		return self.floor

@@ -4,7 +4,7 @@ class Move(object):
 	__floor = 0
 
 	def __init__(self):
-		pass
+		self.__init__(0,0)
 	
 	def __init__(self,room,floor):
 		self.__room = room
