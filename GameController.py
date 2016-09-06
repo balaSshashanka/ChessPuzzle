@@ -8,6 +8,9 @@ import GameConfig
 class GameController(object):
 	def __init__(self):
 		self.__initializeBuilding()
+		self.output = []
+		self.move = []
+		self.gameDetails = {}
 	def __MarkPos(self,Path,Location):
 		if(Location.getObstacle() == GameConfig.ObstacleType.RADAR):
 			self.__MarkRow(Path,Location.getFloor())
@@ -86,14 +89,37 @@ class GameController(object):
 			if(moves[i].GetRow() != destination.getFloor()):
 				if((moves[i].GetColumn() != destination.getRoom())):
 					if(self.BuildingMap.isValidMove(PrevMove,moves[i]) and (moves[i].GetRow()!=-1 and moves[i].GetColumn()!=-1)):
+						out = {}
+						out['row'] = moves[i].GetRow()
+						out['column'] = moves[i].GetColumn()
+						self.output.append(out)
 						PrevMove = moves[i]
 						continue
 					else:
-						#self.PrintPath(Path)
+						if(self.BuildingMap.isValidMove(PrevMove,moves[i])):
+							self.move['moves'] = self.output
+							self.move['IsGameValid'] = 'True'
+						else:
+							out = {}
+							out['IsGameValid'] = 'True'
+							out['GameStatus'] = 'Lose'
+							self.output.append(out)
 						return False
-			if(BuildingMap.isValidMove(PrevMove,moves[i])):
-				#self.PrintPath()
+			if(self.BuildingMap.isValidMove(PrevMove,moves[i])):
+				out = {}
+				out['row'] = moves[i].GetRow()
+				out['column'] = moves[i].GetColumn()
+				self.output.append(out)
+				self.move['moves'] = self.output
+				self.move['IsGameValid'] = 'True'
+				self.move['GameStatus'] = 'Win'
 				return True
+			else:
+				self.move['moves'] = self.output
+				self.move['IsGameValid'] = 'False'
+		if(((moves[i].GetRow()==dest.GetFloor()) and moves[i].GetColumn()==dest.GetRoom()) == False):
+			self.moves['moves'] = self.output
+			self.moves['IsGameValid'] = 'False'
 
 	def PrintPath(self,Path):
 		print(Path)
