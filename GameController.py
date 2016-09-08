@@ -9,7 +9,7 @@ class GameController(object):
 	def __init__(self):
 		self.__initializeBuilding()
 		self.output = []
-		self.move = []
+		self.move = {}
 		self.gameDetails = {}
 	def __MarkPos(self,Path,Location):
 		if(Location.getObstacle() == GameConfig.ObstacleType.RADAR):
@@ -66,7 +66,7 @@ class GameController(object):
 		destination = ObstacleLocation(0,0,GameConfig.ObstacleType.ENEMY_COMMANDER)
 		moves = [Move(0,0) for j in range(50)]
 		Path = numpy.zeros((GameConfig.constants.ROWS,GameConfig.constants.COLUMNS),dtype = int)
-		User.MakeMoves(self.BuildingMap,moves,50)
+		moves = User.MakeMoves(self.BuildingMap,moves,50)
 		for i in range(GameConfig.constants.ROWS):
 			for j in range(GameConfig.constants.COLUMNS):
 				if(self.BuildingMap.GetObstacleType(i,j) == GameConfig.ObstacleType.HEROBOT):
@@ -110,16 +110,22 @@ class GameController(object):
 				out['row'] = moves[i].GetRow()
 				out['column'] = moves[i].GetColumn()
 				self.output.append(out)
+				self.output
 				self.move['moves'] = self.output
 				self.move['IsGameValid'] = 'True'
 				self.move['GameStatus'] = 'Win'
+				print('IsGameValid = True \n GameStatus = Win')
+				self.PrintPath(Path)
 				return True
 			else:
 				self.move['moves'] = self.output
 				self.move['IsGameValid'] = 'False'
-		if(((moves[i].GetRow()==dest.GetFloor()) and moves[i].GetColumn()==dest.GetRoom()) == False):
+		if(((moves[i].GetRow()==dest.GetFloor()) and (moves[i].GetColumn()==dest.GetRoom())) != True):
 			self.moves['moves'] = self.output
 			self.moves['IsGameValid'] = 'False'
+			print('IsGameValid = True \n GameStatus = False')
+			self.PrintPath(Path)
+			return False
 
 	def PrintPath(self,Path):
 		print(Path)

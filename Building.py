@@ -13,10 +13,9 @@ class Building(object):
 	def GetObstacleType(self,room,floor):
 		return self.BuildingMap[room][floor]
 	def isValidMove(self,currentPostion,nextPosition):
-		if currentPostion.GetRow() < GameConfig.constants.ROWS and 	nextPosition.GetRow() < GameConfig.constants.ROWS and currentPostion.GetColumn() < GameConfig.constants.COLUMNS and 	nextPosition.GetColumn() < GameConfig.constants.COLUMNS:
+		if((currentPostion.GetRow() < GameConfig.constants.ROWS) and (nextPosition.GetRow() < GameConfig.constants.ROWS) and (currentPostion.GetColumn() < GameConfig.constants.COLUMNS) and (nextPosition.GetColumn() < GameConfig.constants.COLUMNS)):
 			rowDif = abs(currentPostion.GetRow() - nextPosition.GetRow())
 			columnDiff = abs(currentPostion.GetColumn() - nextPosition.GetColumn())
-
 			if (rowDif == 1 and columnDiff == 2) or (rowDif == 2 and columnDiff == 1):
 				return True
 		return False
